@@ -2,7 +2,7 @@ import { db, firebaseListo } from "./firebase-config.js";
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 /* ============ Configuración editable ============ */
-const WHATSAPP_VENDEDOR = "51999888777";          // código de país + número, sin + ni espacios
+const WHATSAPP_VENDEDOR = "51993771403";          // código de país + número, sin + ni espacios
 const MARCA = "Xiomara AI";
 
 const $ = (s, r = document) => r.querySelector(s);
