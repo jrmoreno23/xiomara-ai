@@ -45,7 +45,7 @@ function montarFormulario(contenedor) {
     if (lead.nombre.length < 2) return aviso("Escribe tu nombre.");
     if (lead.negocio.length < 2) return aviso("Escribe el nombre de tu negocio.");
     if (!lead.rubro) return aviso("Selecciona tu rubro.");
-    if (!lead.telefono) return aviso("Ingresa un celular peruano válido de 9 dígitos (ej. 999 888 777).");
+    if (!lead.telefono) return aviso("Ingresa un celular peruano válido de 9 dígitos (ej. 993 771 403).");
     try { if (Date.now() - Number(sessionStorage.getItem("lead_ts") || 0) < 30000) return aviso("Ya enviaste tus datos. Espera unos segundos."); } catch {}
 
     btn.disabled = true; btn.textContent = "Enviando…"; aviso("");
