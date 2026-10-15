@@ -2,7 +2,7 @@
 <html lang="es-PE" class="scroll-smooth">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Xiomara AI | Agentes Autónomos de Ventas para WhatsApp</title>
 <meta name="description" content="Agentes de IA que atienden, venden y hacen seguimiento por tu WhatsApp 24/7: entienden audios, validan Yape/Plin y derivan a un humano cuando hace falta. Prueba 7 días sin riesgo.">
 <meta name="theme-color" content="#030712">
@@ -18,6 +18,19 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{fontFamily:{sans:['"Plus Jakarta Sans"','system-ui','sans-serif'],display:['"Space Grotesk"','system-ui','sans-serif']},colors:{ink:'#030712'}}}}</script>
 <style>
+  /* 1. BLOQUEO DE SCROLL HORIZONTAL Y FIX DE AUTO-ZOOM PARA IPHONE (iOS) */
+html, body {
+  background: #030712;
+  color: #cbd5e1;
+  max-width: 100vw;
+  overflow-x: hidden !important;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Evita que Safari en iOS haga "zoom-in" molesto al tocar inputs */
+input, select, textarea {
+  font-size: 16px !important;
+}
 body{background:#030712;color:#cbd5e1}
 h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
 :focus-visible{outline:3px solid #06b6d4;outline-offset:2px}
