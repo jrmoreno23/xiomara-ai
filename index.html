@@ -472,7 +472,7 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
     const nv = notaVoz(); bub("out", nv); await nv.reproducir(); if (!ok(id)) return;
     bub("sys", "🎙️ Xiomara está escuchando e interpretando tu audio…"); await wait(reduce ? 100 : 900); if (!ok(id)) return;
     bub("in", transcripcion());
-    await botNota("¡Hola! Qué gusto saludarte. Claro que sí, tenemos vestidos y zapatillas disponibles, y recibimos Yape y Plin. Te muestro opciones y coordinamos el envío a Miraflores hoy mismo.", 1, id, "0:11");
+    await botNota("ia", "¡Holaaa! Qué gusto saludarte. Ajá, claro que sí... tenemos vestidos y zapatillas disponibles, y recibimos Yape y Plin. Te muestro opciones y coordinamos el envío a Miraflores hoy mismo, ¿te parece?", "nota-1");
   }
   async function escFotos(id) {
     bub("out", "¿Qué tienen nuevo? Mándame fotos con precios 🙏"); await wait(reduce ? 100 : 500); if (!ok(id)) return;
@@ -508,7 +508,7 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
     if (!ok(id)) return;
     bub("out", "Sí, sepárame los zapatos porfa"); await wait(reduce ? 100 : 800); if (!ok(id)) return;
     bub("sys", "🔔 Cliente recuperado · aviso enviado a tu equipo");
-    await bot("¡Listo, Carla! Te los separé ✨ Cuando quieras, envíame la captura del Yape y lo coordinamos.", 1200, id);
+    await bot("ia", "Carla, ¡hola! Ayer te quedaste mirando esos zapatos... eeh, ¡y yo me di cuenta! Te cuento que hoy hay envío gratis a Miraflores. Si pagas por Yape, te los mando en el día. ¿Te los separo?", "nota-2", 1200, id);
   }
   const llUI = $("#llamada-ui");
   /* ---------- Voz de la llamada (voz del navegador + timbre) ---------- */
@@ -578,11 +578,11 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
     const tic = () => { if (!ok(id)) return salir(); st.textContent = "00:" + String(s++).padStart(2, "0"); };
     tic(); tm = setInterval(tic, 1000);
     const dice = async (quien, t, n) => { sub.textContent = (quien === "ia" ? "🤖 " : "🗣️ ") + t; await hablar(t, quien, id, "audio/xiomara-" + n + ".mp3"); return ok(id) || salir(); };
-    if (!await dice("ia", "¡Hola, buenas tardes! Gracias por llamar. Soy Xiomara, tu asistente virtual. ¿En qué te puedo ayudar?", 1)) return;
+    if (!await dice("ia", "¡Hola, buenas tardes! Gracias por llamar... Soy Xiomara, tu asistente virtual. ¿En qué te puedo ayudar?")) return;
     if (!await dice("cli", "Hola, quería una cita para mañana por la tarde, por favor.", 2)) return;
-    if (!await dice("ia", "Claro que sí. Mmm, déjame ver… ¡Perfecto! Tengo libre mañana a las cuatro y media. ¿Te la separo a tu nombre?", 3)) return;
+    if (!await dice("ia", "Claro que sí... Mmh... a ver, déjame revisar... ¡Listo! Mañana a las cuatro y media tengo un espacio. ¿Te lo separo a tu nombre?", 3)) return;
     if (!await dice("cli", "Sí, por favor. Muchas gracias.", 4)) return;
-    if (!await dice("ia", "¡Excelente! Ya quedó confirmada tu cita. Te acabo de enviar el resumen por WhatsApp. Que tengas una linda tarde.", 5)) return;
+    if (!await dice("ia", "¡Perfecto! Ya quedó confirmada tu cita. Te acabo de mandar el resumen por WhatsApp, ¿ya? Que tengas una tarde ¡divina!", 5)) return;
     clearInterval(tm); st.textContent = "Llamada finalizada"; onda.classList.remove("on"); llUI.classList.remove("conn");
     await wait(reduce ? 100 : 1000); if (!ok(id)) return;
     llUI.classList.add("hidden"); setEstado("● En línea · Responde en 1.2s", "text-emerald-400");
