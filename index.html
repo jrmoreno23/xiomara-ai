@@ -160,12 +160,12 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
 </section>
 
 <section id="funciones" class="max-w-6xl mx-auto px-4 pb-20">
-  <h2 class="reveal text-3xl sm:text-5xl font-bold text-white text-center">Cuatro pilares, <span class="grad">un solo agente</span></h2>
+  <h2 class="reveal text-3xl sm:text-5xl font-bold text-white text-center">Nuestros pilares, <span class="grad">un solo agente</span></h2>
   <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
     <article class="reveal card glass rounded-2xl p-6"><div class="w-12 h-12 rounded-xl bg-cyan-500/15 text-cyan-400 grid place-items-center text-xl mb-4"><i class="fa-solid fa-microphone-lines"></i></div><h3 class="font-bold text-white">Audios e Imágenes HD</h3><p class="mt-2 text-sm">Transcribe notas de voz y muestra catálogos con fotos grandes, precios y botón de compra.</p></article>
     <article class="reveal card glass rounded-2xl p-6"><div class="w-12 h-12 rounded-xl bg-amber-500/15 text-amber-400 grid place-items-center text-xl mb-4"><i class="fa-solid fa-calendar-check"></i></div><h3 class="font-bold text-white">Soporte 365</h3><p class="mt-2 text-sm">Soporte técnico y mantenimiento continuo de tu nube, los 365 días del año. Somos tus aliados tecnológicos.</p></article>
     <article class="reveal card glass rounded-2xl p-6"><div class="w-12 h-12 rounded-xl bg-pink-500/15 text-pink-400 grid place-items-center text-xl mb-4"><i class="fa-solid fa-chart-line"></i></div><h3 class="font-bold text-white">Auditoría Mensual de Ventas</h3><p class="mt-2 text-sm">Informe en PDF con consultas atendidas, oportunidades perdidas y qué mejorar.</p></article>
-    <article class="reveal card glass rounded-2xl p-6"><div class="w-12 h-12 rounded-xl bg-cyan-500/15 text-cyan-400 grid place-items-center text-xl mb-4"><i class="fa-solid fa-headset"></i></div><h3 class="font-bold text-white">Soporte Local 360</h3><p class="mt-2 text-sm">Un equipo cercano que configura, ajusta y actualiza tu agente de forma continua.</p></article>
+    <article class="reveal card glass rounded-2xl p-6"><div class="w-12 h-12 rounded-xl bg-cyan-500/15 text-cyan-400 grid place-items-center text-xl mb-4"><i class="fa-solid fa-brain"></i></div><h3 class="font-bold text-white">IA Adaptativa</h3><p class="mt-2 text-sm">Aprende de tu negocio y se ajusta a tu catálogo, tus precios y tu forma de vender. Mejora con cada conversación para responder cada vez más como tú.</p></article>
   </div>
   <div class="mt-6 grid lg:grid-cols-2 gap-6">
     <article class="reveal glass neon rounded-3xl p-7">
@@ -219,6 +219,7 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
         </div>
         <div class="mt-5 flex flex-wrap items-center gap-3">
           <button type="button" id="reiniciar" class="inline-flex items-center gap-2 rounded-full bg-slate-950 border border-cyan-400/70 text-cyan-300 font-bold text-sm px-5 py-2.5 shadow-[0_0_20px_-4px_rgba(6,182,212,.7)] hover:bg-cyan-400 hover:text-ink transition"><i class="fa-solid fa-rotate-right"></i>Reiniciar demo</button>
+          <button type="button" id="activar-sonido" class="hidden inline-flex items-center gap-2 rounded-full btn-grad text-sm px-5 py-2.5"><i class="fa-solid fa-volume-high"></i>Activar sonido</button>
           <button type="button" id="reanudar" class="hidden inline-flex items-center gap-2 rounded-full btn-grad text-sm px-5 py-2.5"><i class="fa-solid fa-play"></i>Reanudar IA</button>
         </div>
         <div id="alerta" class="hidden mt-5 rounded-2xl border border-red-500/60 bg-red-500/10 p-4 text-sm text-red-100" role="status"></div>
@@ -557,23 +558,30 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
     }
   }
   const sinAudio = new Set();
-  /* iPhone/Safari solo deja sonar audio si se "desbloquea" con un toque del usuario: se usa UN solo elemento <audio> reutilizable */
-  const AU = new Audio(); AU.preload = "auto";
-  const SILENCIO = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAIARKwAABCxAgAEABAAZGF0YQQAAAAAAAAA";
-  let ctxAudio = null, desbloqueado = false;
-  function desbloquear() {
-    if (desbloqueado) return; desbloqueado = true;
-    try { AU.src = SILENCIO; const p = AU.play(); if (p && p.then) p.then(() => { if (AU.src === SILENCIO) AU.pause(); }).catch(() => {}); } catch (e) {}
-    try { const C = window.AudioContext || window.webkitAudioContext; if (C) { ctxAudio = new C(); ctxAudio.resume(); } } catch (e) {}
-    try { if ("speechSynthesis" in window) { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } } catch (e) {}
-    ["touchend", "pointerup", "click", "keydown"].forEach(ev => removeEventListener(ev, desbloquear, true));
+  /* iPhone/Safari: el audio solo suena si arranca con un toque real. Se usa UN <audio> reutilizable y el desbloqueo solo se da por hecho cuando Safari lo acepta. */
+  const AU = new Audio(); AU.preload = "auto"; AU.setAttribute("playsinline", "");
+  function wavSilencio() {
+    const n = 800, b = new ArrayBuffer(44 + n * 2), v = new DataView(b), w = (o, t) => [...t].forEach((c, i) => v.setUint8(o + i, c.charCodeAt(0)));
+    w(0, "RIFF"); v.setUint32(4, 36 + n * 2, true); w(8, "WAVEfmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true); v.setUint32(24, 8000, true); v.setUint32(28, 16000, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true); w(36, "data"); v.setUint32(40, n * 2, true);
+    return URL.createObjectURL(new Blob([b], { type: "audio/wav" }));
   }
-  const armar = () => ["touchend", "pointerup", "click", "keydown"].forEach(ev => addEventListener(ev, desbloquear, true)); armar();
+  const SILENCIO = wavSilencio(), btnSonido = $("#activar-sonido"), EVT = ["touchend", "pointerup", "click", "keydown"];
+  let ctxAudio = null, desbloqueado = false;
+  const marcar = () => { if (desbloqueado) return; desbloqueado = true; EVT.forEach(ev => removeEventListener(ev, desbloquear, true)); btnSonido.classList.add("hidden"); };
+  function desbloquear() {
+    if (desbloqueado) return;
+    try { AU.src = SILENCIO; const p = AU.play(); if (p && p.then) p.then(() => { if (AU.src === SILENCIO) AU.pause(); marcar(); }, () => {}); else marcar(); } catch (e) {}
+    try { const C = window.AudioContext || window.webkitAudioContext; if (C && !ctxAudio) ctxAudio = new C(); if (ctxAudio) ctxAudio.resume(); } catch (e) {}
+    try { if ("speechSynthesis" in window) { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } } catch (e) {}
+  }
+  const armar = () => EVT.forEach(ev => addEventListener(ev, desbloquear, true)); armar();
+  const esIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if (esIOS) btnSonido.classList.remove("hidden");
   let avisado = false;
   async function hablar(texto, quien, id, src, forzar) {
     if (!(llVoz || forzar)) return wait(reduce ? 100 : Math.max(1800, texto.length * 55));
     if (src && !sinAudio.has(src)) {
-      const bien = await new Promise(r => { audioAct = AU; AU.onerror = () => { sinAudio.add(src); r(false); }; AU.onended = () => r(true); AU.src = src; const p = AU.play(); if (p && p.catch) p.catch(e => { if (e && e.name === "NotAllowedError" && !avisado) { avisado = true; desbloqueado = false; armar(); bub("sys", "🔊 Toca la pantalla para activar el sonido"); setTimeout(() => avisado = false, 8000); } r(false); }); });
+      const bien = await new Promise(r => { audioAct = AU; AU.onerror = () => { sinAudio.add(src); r(false); }; AU.onended = () => r(true); AU.src = src; const p = AU.play(); if (p && p.then) p.then(marcar, e => { if (e && e.name === "NotAllowedError" && !avisado) { avisado = true; armar(); btnSonido.classList.remove("hidden"); bub("sys", "🔊 Toca “Activar sonido” para escuchar a Xiomara"); setTimeout(() => avisado = false, 8000); } r(false); }); });
       if (bien) { await wait(reduce ? 50 : 250); return; }
     }
     if (!("speechSynthesis" in window)) return wait(reduce ? 100 : Math.max(1800, texto.length * 55));
