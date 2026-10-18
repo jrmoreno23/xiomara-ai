@@ -21,7 +21,9 @@
 body{background:#030712;color:#cbd5e1}
 h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
 :focus-visible{outline:3px solid #06b6d4;outline-offset:2px}
-.glass{background:rgba(255,255,255,.05);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1)}
+.glass{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1)}
+@media (max-width:768px){.glass{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(15,23,42,.78)}}
+#logros,#planes,#porque,#garantia,#contacto{content-visibility:auto;contain-intrinsic-size:auto 900px}
 .neon{box-shadow:0 0 0 1px rgba(6,182,212,.35),0 0 44px -12px rgba(6,182,212,.55)}
 .grad{background:linear-gradient(90deg,#f59e0b,#ec4899 55%,#06b6d4);-webkit-background-clip:text;background-clip:text;color:transparent}
 .btn-grad{background:linear-gradient(90deg,#f59e0b,#ec4899);color:#030712;font-weight:700;transition:transform .2s,box-shadow .2s}
@@ -38,17 +40,17 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
 
 /* Fondo ambiental en movimiento (boca abierta): solo transform/opacity, ligero para la CPU */
 .aurora{position:fixed;inset:0;z-index:-1;overflow:hidden;background:#030712;pointer-events:none}
-.aurora i{position:absolute;border-radius:50%;will-change:transform;mix-blend-mode:screen}
-.aurora .a1{width:75vmax;height:75vmax;left:-25vmax;top:-30vmax;background:radial-gradient(circle,rgba(6,182,212,.45),transparent 62%);animation:dA 28s ease-in-out infinite alternate}
-.aurora .a2{width:70vmax;height:70vmax;right:-28vmax;top:-10vmax;background:radial-gradient(circle,rgba(236,72,153,.4),transparent 62%);animation:dB 34s ease-in-out infinite alternate}
-.aurora .a3{width:80vmax;height:80vmax;left:10vmax;bottom:-45vmax;background:radial-gradient(circle,rgba(245,158,11,.36),transparent 62%);animation:dC 31s ease-in-out infinite alternate}
+.aurora i{position:absolute;border-radius:50%;will-change:transform}
+.aurora .a1{width:60vmax;height:60vmax;left:-25vmax;top:-30vmax;background:radial-gradient(circle,rgba(6,182,212,.45),transparent 62%);animation:dA 28s ease-in-out infinite alternate}
+.aurora .a2{width:56vmax;height:56vmax;right:-28vmax;top:-10vmax;background:radial-gradient(circle,rgba(236,72,153,.4),transparent 62%);animation:dB 34s ease-in-out infinite alternate}
+.aurora .a3{width:64vmax;height:64vmax;left:10vmax;bottom:-45vmax;background:radial-gradient(circle,rgba(245,158,11,.36),transparent 62%);animation:dC 31s ease-in-out infinite alternate}
 .aurora::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(3,7,18,.1),rgba(3,7,18,.72) 100%)}
 @keyframes dA{to{transform:translate3d(34vw,26vh,0) scale(1.18)}}
 @keyframes dB{to{transform:translate3d(-30vw,34vh,0) scale(.9)}}
 @keyframes dC{to{transform:translate3d(30vw,-22vh,0) scale(1.12)}}
 /* malla tecnológica en movimiento (solo transform) */
-.aurora .tg{position:absolute;inset:0;overflow:hidden;-webkit-mask-image:radial-gradient(ellipse at 50% 40%,#000 15%,transparent 78%);mask-image:radial-gradient(ellipse at 50% 40%,#000 15%,transparent 78%)}
-.aurora .tg-in{position:absolute;inset:-88px;background-image:linear-gradient(rgba(125,211,252,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(125,211,252,.1) 1px,transparent 1px);background-size:44px 44px;animation:gm 9s linear infinite}
+.aurora .tg{position:absolute;inset:0;overflow:hidden}
+.aurora .tg-in{position:absolute;inset:-88px;background-image:linear-gradient(rgba(125,211,252,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(125,211,252,.07) 1px,transparent 1px);background-size:44px 44px;animation:gm 9s linear infinite}
 @keyframes gm{to{transform:translate3d(44px,44px,0)}}
 .aurora .st{position:absolute;top:-30vh;width:1px;height:30vh;background:linear-gradient(transparent,var(--c,rgba(34,211,238,.75)),transparent);animation:sf 10s linear infinite}
 .aurora .sw{position:absolute;left:0;right:0;top:-20vh;height:20vh;background:linear-gradient(transparent,rgba(6,182,212,.07),transparent);animation:sf 15s linear infinite}
@@ -62,7 +64,7 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
 .ll-b{width:2.75rem;height:2.75rem;border-radius:50%;display:grid;place-items:center;background:#2a3942;color:#e9edef}
 /* WhatsApp flotante */
 .wa-float{position:fixed;right:1rem;bottom:max(1rem,env(safe-area-inset-bottom));z-index:30;display:flex;align-items:center;gap:.9rem;text-decoration:none}
-.wa-label{position:relative;padding:.5rem .9rem;border-radius:1rem;background:rgba(7,13,28,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(37,211,102,.45);box-shadow:0 10px 30px -10px rgba(37,211,102,.6);line-height:1.2;animation:waIn .7s .8s both}
+.wa-label{position:relative;padding:.5rem .9rem;border-radius:1rem;background:rgba(7,13,28,.94);border:1px solid rgba(37,211,102,.45);box-shadow:0 10px 30px -10px rgba(37,211,102,.6);line-height:1.2;animation:waIn .7s .8s both}
 .wa-label::after{content:"";position:absolute;right:-6px;top:50%;width:10px;height:10px;margin-top:-5px;transform:rotate(45deg);background:rgba(7,13,28,.95);border-top:1px solid rgba(37,211,102,.45);border-right:1px solid rgba(37,211,102,.45)}
 .wa-label b{display:block;color:#fff;font-size:.85rem;white-space:nowrap}
 .wa-label span{display:flex;align-items:center;gap:.35rem;color:#4ade80;font-size:.7rem;font-weight:700}
@@ -109,7 +111,7 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
 </style>
 </head>
 <body class="font-sans antialiased">
-<div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i><div class="tg"><div class="tg-in"></div></div><span class="sw"></span><span class="st" style="left:7%;animation-delay:-2s"></span><span class="st" style="left:21%;animation-delay:-7s;animation-duration:13s;--c:rgba(236,72,153,.7)"></span><span class="st" style="left:38%;animation-delay:-4s;animation-duration:9s"></span><span class="st" style="left:57%;animation-delay:-9s;animation-duration:12s;--c:rgba(245,158,11,.7)"></span><span class="st" style="left:74%;animation-delay:-5s;animation-duration:11s"></span><span class="st" style="left:91%;animation-delay:-1s;animation-duration:14s;--c:rgba(236,72,153,.7)"></span></div>
+<div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i><div class="tg"><div class="tg-in"></div></div><span class="sw"></span><span class="st" style="left:7%;animation-delay:-2s"></span><span class="st" style="left:21%;animation-delay:-7s;animation-duration:13s;--c:rgba(236,72,153,.7)"></span><span class="st" style="left:57%;animation-delay:-9s;animation-duration:12s;--c:rgba(245,158,11,.7)"></span><span class="st" style="left:91%;animation-delay:-1s;animation-duration:14s;--c:rgba(236,72,153,.7)"></span></div>
 
 <header class="sticky top-0 z-40 glass border-x-0 border-t-0">
   <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between text-white">
@@ -370,7 +372,7 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
   LOGROS.forEach((l, i) => {
     const a = document.createElement("article");
     a.className = "glass neon rounded-3xl overflow-hidden card";
-    const im = document.createElement("img"); im.src = arteLogro(l); im.alt = ""; im.className = "w-full aspect-[2/1] object-cover"; im.loading = "lazy";
+    const im = document.createElement("img"); im.src = arteLogro(l); im.alt = ""; im.className = "w-full aspect-[2/1] object-cover"; im.loading = "lazy"; im.decoding = "async";
     const b = document.createElement("div"); b.className = "p-6";
     const tag = document.createElement("span");
     tag.className = "inline-block text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full " + (l.real ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40" : "bg-amber-500/15 text-amber-300 border border-amber-500/40");
@@ -391,7 +393,8 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
   pista.addEventListener("keydown", e => { if (e.key === "ArrowRight") mover(1); if (e.key === "ArrowLeft") mover(-1); });
   let pausa = false; ["mouseenter", "focusin", "touchstart"].forEach(ev => pista.addEventListener(ev, () => pausa = true));
   ["mouseleave", "focusout"].forEach(ev => pista.addEventListener(ev, () => pausa = false));
-  if (!reduce) setInterval(() => { if (!pausa && !document.hidden) mover(1); }, 5500);
+  let visibleLg = false; if ("IntersectionObserver" in window) new IntersectionObserver(es => visibleLg = es[0].isIntersecting).observe(pista);
+  if (!reduce) setInterval(() => { if (!pausa && visibleLg && !document.hidden) mover(1); }, 5500);
 
   /* ---------- Simulador de WhatsApp ---------- */
   const chat = $("#chat"), estado = $("#estado"), alerta = $("#alerta"), btnReanudar = $("#reanudar");
@@ -420,8 +423,10 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
 
   function crearNota(texto, quien, src, dur, ver) {
     const barras = Array.from({ length: 26 }, (_, i) => `<i style="height:${5 + ((i * 11) % 17)}px"></i>`).join("");
-    const w = el(`<div><div class="flex items-center gap-2 min-w-[210px]"><button type="button" class="w-8 h-8 shrink-0 rounded-full ${quien === "ia" ? "bg-amber-400" : "bg-cyan-500"} text-slate-900 grid place-items-center" aria-label="Reproducir nota de voz"><i class="fa-solid fa-play text-xs"></i></button><span class="wave flex-1">${barras}</span><span class="text-[11px] text-slate-300">${dur}</span></div>${ver ? '<p class="nv-t mt-1 text-[11px] text-slate-300 italic"></p>' : ""}</div>`);
+    const w = el(`<div><div class="flex items-center gap-2 min-w-[210px]"><button type="button" class="w-8 h-8 shrink-0 rounded-full ${quien === "ia" ? "bg-amber-400" : "bg-cyan-500"} text-slate-900 grid place-items-center" aria-label="Reproducir nota de voz"><i class="fa-solid fa-play text-xs"></i></button><span class="wave flex-1">${barras}</span><span class="dur text-[11px] text-slate-300">${dur}</span></div>${ver ? '<p class="nv-t mt-1 text-[11px] text-slate-300 italic"></p>' : ""}</div>`);
     if (ver) $(".nv-t", w).textContent = "“" + texto + "”";
+    const dsp = $(".dur", w);
+    if (src && !sinAudio.has(src)) { const m = new Audio(); m.preload = "metadata"; m.onerror = () => sinAudio.add(src); m.onloadedmetadata = () => { const t = Math.round(m.duration); if (t) dsp.textContent = Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0"); }; m.src = src; }
     const btn = $("button", w), onda = $(".wave", w), ico = $("i", btn); let activa = false;
     const parar = () => { activa = false; onda.classList.remove("on"); ico.className = "fa-solid fa-play text-xs"; };
     const reproducir = async () => { cortarVoz(); activa = true; onda.classList.add("on"); ico.className = "fa-solid fa-pause text-xs"; await hablar(texto, quien, corrida, src, true); parar(); };
@@ -441,7 +446,7 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
     const pst = $(".snap", w);
     PROD.forEach(p => {
       const f = document.createElement("figure"); f.className = "m-0 rounded-2xl overflow-hidden bg-[#111b21] border border-white/10";
-      const im = document.createElement("img"); im.src = arteProducto(p); im.alt = p.nombre; im.className = "w-full aspect-[4/3] object-cover";
+      const im = document.createElement("img"); im.src = arteProducto(p); im.alt = p.nombre; im.className = "w-full aspect-[4/3] object-cover"; im.loading = "lazy"; im.decoding = "async";
       const c = document.createElement("figcaption"); c.className = "p-2.5";
       c.innerHTML = '<b class="text-[13px] text-white"></b><div class="flex items-center justify-between mt-1"><span class="text-amber-400 font-bold text-sm"></span><span class="text-[10px] font-bold text-emerald-300 bg-emerald-500/15 rounded-full px-2 py-0.5">● Disponible</span></div><button type="button" class="mt-2 w-full rounded-full btn-grad py-1.5 text-xs">Pedir ahora</button>';
       $("b", c).textContent = p.nombre; $(".text-amber-400", c).textContent = p.precio; $("button", c).addEventListener("click", () => pedir(p));
@@ -455,7 +460,7 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
   function preparar() {   // pone la pantalla en blanco y restablece el estado
     corrida++; minuto = 40; chat.innerHTML = ""; $("#llamada-ui").classList.add("hidden"); alerta.classList.add("hidden"); alerta.textContent = "";
     btnReanudar.classList.add("hidden"); $$("#controles .esc").forEach(b => b.setAttribute("aria-pressed", "false"));
-    setEstado("● En línea · Responde en 1.2s", "text-emerald-400"); if ("speechSynthesis" in window) speechSynthesis.cancel(); if (audioAct) audioAct.pause();
+    setEstado("● En línea · Responde en 1.2s", "text-emerald-400"); cortarVoz();
     return corrida;
   }
   function conversacionInicial() {   // lo que se ve desde el primer instante: nada de pantalla vacía
@@ -468,14 +473,11 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
     const nota = crearNota(texto, "ia", "audio/xiomara-nota-" + n + ".mp3", dur, true);
     const b = await bot(nota, 1300, id); if (b) await nota.reproducir(); return b;
   }
- async function escVoz(id) {
+  async function escVoz(id) {
     const nv = notaVoz(); bub("out", nv); await nv.reproducir(); if (!ok(id)) return;
     bub("sys", "🎙️ Xiomara está escuchando e interpretando tu audio…"); await wait(reduce ? 100 : 900); if (!ok(id)) return;
     bub("in", transcripcion());
-    
-    // Reemplaza botNota por esta línea que reproduce el MP3 y dibuja la burbuja de audio:
-    const textoNota = "¡Holaaa! Qué gusto saludarte. Ajá, claro que sí... tenemos vestidos y zapatillas disponibles, y recibimos Yape y Plin. Te muestro opciones y coordinamos el envío a Miraflores hoy mismo, ¿te parece?";
-    await hablar(textoNota, "ia", id, "audio/xiomara-nota-1.mp3");
+    await botNota("¡Holaaa! Qué gusto saludarte. Ajá, claro que sí… tenemos vestidos y zapatillas disponibles, y recibimos Yape y Plin. Te muestro opciones y coordinamos el envío a Miraflores hoy mismo, ¿te parece?", 1, id, "0:11");
   }
   async function escFotos(id) {
     bub("out", "¿Qué tienen nuevo? Mándame fotos con precios 🙏"); await wait(reduce ? 100 : 500); if (!ok(id)) return;
@@ -507,11 +509,11 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
     await bot("¡Hola, Carla! 👋 Ayer viste los zapatos urbanos talla 38 y quedan solo 2. ¿Te los separo hasta hoy?", 1300, id);
     if (!ok(id)) return;
     bub("sys", "⏱️ Sin respuesta · el Sabueso reintenta con otro enfoque"); await wait(reduce ? 100 : 1200); if (!ok(id)) return;
-    await botNota("Carla, te cuento que hoy hay envío gratis a Miraflores. Si pagas por Yape, te los mando en el día. ¿Te los separo?", 2, id, "0:08");
+    await botNota("Carla, ¡hola! Ayer te quedaste mirando esos zapatos… eeh, ¡y yo me di cuenta! Te cuento que hoy hay envío gratis a Miraflores. Si pagas por Yape, te los mando en el día. ¿Te los separo?", 2, id, "0:12");
     if (!ok(id)) return;
     bub("out", "Sí, sepárame los zapatos porfa"); await wait(reduce ? 100 : 800); if (!ok(id)) return;
     bub("sys", "🔔 Cliente recuperado · aviso enviado a tu equipo");
-    await bot("ia", "Carla, ¡hola! Ayer te quedaste mirando esos zapatos... eeh, ¡y yo me di cuenta! Te cuento que hoy hay envío gratis a Miraflores. Si pagas por Yape, te los mando en el día. ¿Te los separo?", "nota-2", 1200, id);
+    await bot("¡Listo, Carla! Te los separé ✨ Cuando quieras, envíame la captura del Yape y lo coordinamos.", 1200, id);
   }
   const llUI = $("#llamada-ui");
   /* ---------- Voz de la llamada (voz del navegador + timbre) ---------- */
@@ -552,25 +554,19 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
       await wait(reduce ? 30 : (PAUSA[fin] || 200));
     }
   }
-// FUNCIÓN HABLADA ACTUALIZADA: Xiomara usa estrictamente sus MP3 reales; el cliente usa TTS
+  const sinAudio = new Set();
   async function hablar(texto, quien, id, src, forzar) {
-    if (quien === 'ia' && (llVoz || forzar) && src) {
-      const bien = await new Promise(r => { 
-        const a = new Audio(src); 
-        audioAct = a; 
-        a.onerror = () => r(false); 
-        a.onended = () => r(true); 
-        a.play().catch(() => r(false)); 
-      });
-      if (bien) { await wait(300); return; }
+    if (!(llVoz || forzar)) return wait(reduce ? 100 : Math.max(1800, texto.length * 55));
+    if (src && !sinAudio.has(src)) {
+      const bien = await new Promise(r => { const a = new Audio(src); audioAct = a; a.onerror = () => { sinAudio.add(src); r(false); }; a.onended = () => r(true); a.play().catch(() => r(false)); });
+      if (bien) { await wait(reduce ? 50 : 250); return; }
     }
-    if (quien === 'cli' && (llVoz || forzar) && ('speechSynthesis' in window)) {
-      speechSynthesis.cancel();
-      await hablarTTS(texto, quien, id, forzar);
-      return;
-    }
-    return wait(reduce ? 100 : Math.max(1800, texto.length * 55));
+    if (!("speechSynthesis" in window)) return wait(reduce ? 100 : Math.max(1800, texto.length * 55));
+    speechSynthesis.cancel(); await hablarTTS(texto, quien, id, forzar);
   }
+  /* Precarga de los mp3 cuando la demo está por verse (reproducción inmediata, sin trabar la carga inicial) */
+  const precarga = [];
+  if ("IntersectionObserver" in window) { const o = new IntersectionObserver(es => { if (es[0].isIntersecting) { o.disconnect(); ["1", "3", "5", "nota-1", "nota-2"].forEach(n => { const a = new Audio(); a.preload = "auto"; a.src = "audio/xiomara-" + n + ".mp3"; precarga.push(a); }); } }, { rootMargin: "500px" }); o.observe($("#demo")); }
   async function escLlamada(id) {
     const st = $("#ll-estado"), sub = $("#ll-sub"), onda = $("#ll-onda"); let tm = null;
     const salir = () => { clearInterval(tm); return false; };
@@ -581,9 +577,9 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
     const tic = () => { if (!ok(id)) return salir(); st.textContent = "00:" + String(s++).padStart(2, "0"); };
     tic(); tm = setInterval(tic, 1000);
     const dice = async (quien, t, n) => { sub.textContent = (quien === "ia" ? "🤖 " : "🗣️ ") + t; await hablar(t, quien, id, "audio/xiomara-" + n + ".mp3"); return ok(id) || salir(); };
-    if (!await dice("ia", "¡Hola, buenas tardes! Gracias por llamar... Soy Xiomara, tu asistente virtual. ¿En qué te puedo ayudar?")) return;
+    if (!await dice("ia", "¡Hola, buenas tardes! Gracias por llamar… Soy Xiomara, tu asistente virtual. ¿En qué te puedo ayudar?", 1)) return;
     if (!await dice("cli", "Hola, quería una cita para mañana por la tarde, por favor.", 2)) return;
-    if (!await dice("ia", "Claro que sí... Mmh... a ver, déjame revisar... ¡Listo! Mañana a las cuatro y media tengo un espacio. ¿Te lo separo a tu nombre?", 3)) return;
+    if (!await dice("ia", "Claro que sí… Mmh… a ver, déjame revisar… ¡Listo! Mañana a las cuatro y media tengo un espacio. ¿Te lo separo a tu nombre?", 3)) return;
     if (!await dice("cli", "Sí, por favor. Muchas gracias.", 4)) return;
     if (!await dice("ia", "¡Perfecto! Ya quedó confirmada tu cita. Te acabo de mandar el resumen por WhatsApp, ¿ya? Que tengas una tarde ¡divina!", 5)) return;
     clearInterval(tm); st.textContent = "Llamada finalizada"; onda.classList.remove("on"); llUI.classList.remove("conn");
@@ -608,7 +604,6 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
   });
   conversacionInicial();
 })();
-  
 </script>
 <script type="module" src="app.js"></script>
 </body>
