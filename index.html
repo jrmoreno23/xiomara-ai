@@ -549,13 +549,24 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
       await wait(reduce ? 30 : (PAUSA[fin] || 200));
     }
   }
+// FUNCIÓN HABLADA ACTUALIZADA: Xiomara usa estrictamente sus MP3 reales; el cliente usa TTS
   async function hablar(texto, quien, id, src, forzar) {
-    if ((llVoz || forzar) && src) {
-      const bien = await new Promise(r => { const a = new Audio(src); audioAct = a; a.onerror = () => r(false); a.onended = () => r(true); a.play().catch(() => r(false)); });
+    if (quien === 'ia' && (llVoz || forzar) && src) {
+      const bien = await new Promise(r => { 
+        const a = new Audio(src); 
+        audioAct = a; 
+        a.onerror = () => r(false); 
+        a.onended = () => r(true); 
+        a.play().catch(() => r(false)); 
+      });
       if (bien) { await wait(300); return; }
     }
-    if (!(llVoz || forzar) || !("speechSynthesis" in window)) return wait(reduce ? 100 : Math.max(1800, texto.length * 55));
-    speechSynthesis.cancel(); await hablarTTS(texto, quien, id, forzar);
+    if (quien === 'cli' && (llVoz || forzar) && ('speechSynthesis' in window)) {
+      speechSynthesis.cancel();
+      await hablarTTS(texto, quien, id, forzar);
+      return;
+    }
+    return wait(reduce ? 100 : Math.max(1800, texto.length * 55));
   }
   async function escLlamada(id) {
     const st = $("#ll-estado"), sub = $("#ll-sub"), onda = $("#ll-onda"); let tm = null;
@@ -594,6 +605,7 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
   });
   conversacionInicial();
 })();
+  
 </script>
 <script type="module" src="app.js"></script>
 </body>
