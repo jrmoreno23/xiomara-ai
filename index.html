@@ -468,11 +468,14 @@ h1,h2,h3,.font-display{font-family:'Space Grotesk',system-ui,sans-serif}
     const nota = crearNota(texto, "ia", "audio/xiomara-nota-" + n + ".mp3", dur, true);
     const b = await bot(nota, 1300, id); if (b) await nota.reproducir(); return b;
   }
-  async function escVoz(id) {
+ async function escVoz(id) {
     const nv = notaVoz(); bub("out", nv); await nv.reproducir(); if (!ok(id)) return;
     bub("sys", "🎙️ Xiomara está escuchando e interpretando tu audio…"); await wait(reduce ? 100 : 900); if (!ok(id)) return;
     bub("in", transcripcion());
-    await botNota("ia", "¡Holaaa! Qué gusto saludarte. Ajá, claro que sí... tenemos vestidos y zapatillas disponibles, y recibimos Yape y Plin. Te muestro opciones y coordinamos el envío a Miraflores hoy mismo, ¿te parece?", "nota-1");
+    
+    // Reemplaza botNota por esta línea que reproduce el MP3 y dibuja la burbuja de audio:
+    const textoNota = "¡Holaaa! Qué gusto saludarte. Ajá, claro que sí... tenemos vestidos y zapatillas disponibles, y recibimos Yape y Plin. Te muestro opciones y coordinamos el envío a Miraflores hoy mismo, ¿te parece?";
+    await hablar(textoNota, "ia", id, "audio/xiomara-nota-1.mp3");
   }
   async function escFotos(id) {
     bub("out", "¿Qué tienen nuevo? Mándame fotos con precios 🙏"); await wait(reduce ? 100 : 500); if (!ok(id)) return;
